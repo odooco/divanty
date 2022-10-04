@@ -15,6 +15,12 @@ _logger = logging.getLogger("=== Import Product Template ===")
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    def import_product_all(self):
+        for item in self:
+            instance_ids = self.env['eg.ecom.instance'].search([('provider', '=', 'eg_shopify')])
+            for instance_id in instance_ids:
+                item.import_product_from_shopify(instance_id)
+
     def import_product_from_shopify(self, instance_id=None, product_image=None, default_product_id=None):
         status = "no"
         text = ""
