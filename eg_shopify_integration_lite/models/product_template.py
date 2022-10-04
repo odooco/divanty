@@ -19,7 +19,8 @@ class ProductTemplate(models.Model):
         for item in self:
             instance_ids = self.env['eg.ecom.instance'].search([('provider', '=', 'eg_shopify')])
             for instance_id in instance_ids:
-                item.import_product_from_shopify(instance_id)
+                item.export_product_in_middle_layer(instance_id)
+                #item.export_product_in_shopify(instance_id)
 
     def import_product_all(self):
         for item in self:
