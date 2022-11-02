@@ -15,7 +15,7 @@ _logger = logging.getLogger("==== CUSTOMER ====")
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    def import_product_all(self):
+    def import_partner_all(self):
         for item in self:
             instance_ids = self.env['eg.ecom.instance'].search([('provider', '=', 'eg_shopify')])
             for instance_id in instance_ids:
