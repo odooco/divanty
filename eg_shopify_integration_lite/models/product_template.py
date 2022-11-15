@@ -1,7 +1,7 @@
 import logging
 
 from odoo import models
-from odoo.exceptions import Warning
+from odoo.exceptions import Warning, ValidationError
 
 try:
     import shopify
@@ -18,8 +18,9 @@ class ProductTemplate(models.Model):
     def export_product_all(self):
         for item in self:
             instance_ids = self.env['eg.ecom.instance'].search([('provider', '=', 'eg_shopify')])
+            raise ValidationError(instance_ids)
             for instance_id in instance_ids:
-                item.export_product_in_middle_layer(instance_id)
+                #item.export_product_in_middle_layer(instance_id)
                 item.export_product_in_shopify(instance_id)
 
     def import_product_all(self):
