@@ -20,7 +20,7 @@ class SaleOrder(models.Model):
 
     def import_sale_order_from_shopify(self, instance_id=None, product_create=None, product_image=None, cron=None):
         if cron == "yes":  # New Changes by akash
-            instance_ids = self.env["eg.ecom.instance"].search([])
+            instance_ids = self.env["eg.ecom.instance"].search([('provider', '=', 'eg_shopify')])
         else:
             instance_ids = [instance_id]
         for instance_id in instance_ids:
